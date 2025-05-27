@@ -2,16 +2,50 @@
 
 // testing git alias
 
+/*
 int power(int m, int n);
+*/
+
+float fahrCelsius(float fahr);
 
 int main() { 
+    float fahr;
+    float celsius;
+    int lower = 0;
+    int upper = 300;
+    int step = 20;
+
+    fahr = lower;
+    while (fahr <= upper) {
+        celsius = fahrCelsius(fahr);
+        printf("%3.0f %6.1f\n", fahr, celsius);
+        fahr = fahr + step;
+    }
+
+
+
+
+
+
+
+
+/*
     int i;
 
     for (i = 0; i < 10; ++i)
         printf("%d %d %d \n", i, power(2,1), power(-3,i));
+*/
     return 0;    
 }
 
+float fahrCelsius(float fahr){
+    float celsius;
+    celsius = (5.0/9.0) * (fahr - 32.0);
+    return celsius;
+    
+}
+
+/*
 int power(int base, int n) {
     int i;
     int p;
@@ -21,6 +55,7 @@ int power(int base, int n) {
         p = p * base;
     return p;
 }
+*/
 
 /*
     int c;
