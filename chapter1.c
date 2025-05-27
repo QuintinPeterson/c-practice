@@ -1,14 +1,20 @@
 #include <stdio.h>
 
-// testing git alias
 
-/*
 int power(int m, int n);
-*/
 
 float fahrCelsius(float fahr);
 
+
 int main() { 
+
+
+
+
+
+
+
+/* | Fahr-celsius conversion table using a function |
     float fahr;
     float celsius;
     int lower = 0;
@@ -21,13 +27,7 @@ int main() {
         printf("%3.0f %6.1f\n", fahr, celsius);
         fahr = fahr + step;
     }
-
-
-
-
-
-
-
+*/
 
 /*
     int i;
