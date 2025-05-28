@@ -18,16 +18,17 @@ int main() {
     int len;                /* current line length */
     int max;                /* maximum length seen so far */
     char line[MAXLINE];     /* current input line */
-    char longest[MAXLINE];  /* longest line saved here */
+    char verified[MAXLINE];  /* verified line => 80 characters */
 
     max = 0;
     while ((len = get_line(line, MAXLINE)) > 0)
-        if (len > max) {
+        if (len > 80) {
             max = len;
-            copy(longest, line);
+            copy(verified, line);
+            printf("%s", verified);
         }
-    if (max > 0)    /* there was a line */
-        printf("%s", longest);
+    
+        
     
 /* | Fahr-celsius conversion table using a function |
     float fahr;
