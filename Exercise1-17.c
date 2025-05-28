@@ -9,7 +9,7 @@ void copy(char to[], char from[]);
 
 int main() { 
 
-    /* print longest input line */
+    /* print input longer than 80 characters */
     int len;                /* current line length */
     int max;                /* maximum length seen so far */
     char line[MAXLINE];     /* current input line */
