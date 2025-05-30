@@ -4,16 +4,26 @@ int get_line(char line[], int maxline);
 
 void copy(char to[], char from[]);
 
+void remove_trailing_blanks(char s[]);
+
 #define MAXLINE 1000 /* maximum input line size */
 
 
 int main() { 
 
+    int c;
+
     char line[MAXLINE];     /* current input line */
     char verified[MAXLINE];
 
-    get_line(line, MAXLINE);
-    copy(verified, line);
+   while (get_line(line, MAXLINE) > 0) {
+    remove_trailing_blanks(line);
+
+    if (line[0] != '\n' && line[0] != '\0') {
+        copy(verified, line);
+        printf("%s", verified);
+    }
+   }
 
     
     
@@ -46,4 +56,13 @@ void copy(char to[], char from[])
     i = 0;
     while ((to[i] = from[i]) != '\0')
         ++i;
+}
+
+void remove_trailing_blanks(char s[]) {
+    int i = 0;
+    while (s[i] != '\0')
+        ++i;
+    --i;
+
+    s[i+1] = '\0';
 }
