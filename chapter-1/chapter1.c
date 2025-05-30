@@ -5,28 +5,34 @@ int power(int m, int n);
 
 float fahrCelsius(float fahr);
 
-int get_line(char line[], int maxline);
-
-void copy(char to[], char from[]);
-
 #define MAXLINE 1000 /* maximum input line size */
+
+int max;                /* maximum length seen so far */
+char line[MAXLINE];     /* current input line */
+char longest[MAXLINE];  /* longest line saved here */
+
+int get_line(void);
+
+void copy(void);
+
 
 
 int main() { 
 
     /* print longest input line */
     int len;                /* current line length */
-    int max;                /* maximum length seen so far */
-    char line[MAXLINE];     /* current input line */
-    char verified[MAXLINE];  /* verified line => 80 characters */
+    extern int max;
+    extern char longest [];
+    
 
     max = 0;
-    while ((len = get_line(line, MAXLINE)) > 0)
-        if (len > 80) {
+    while ((len = get_line()) > 0)
+        if (len > max) {
             max = len;
-            copy(verified, line);
-            printf("%s", verified);
+            copy();
         }
+    if (max > 0)
+        printf("%s", longest);
     
         
     
@@ -55,29 +61,30 @@ int main() {
 }
 
 /* getline: read a line into s, return length */
-int get_line(char s[], int lim) 
+int get_line(void) 
 {
     int c;
     int i;
 
-    for (i=0; i<lim-1 && (c=getchar()) != EOF && c!= '\n'; ++i) {
-        s[i] = c;
+    for (i=0; i < MAXLINE-1 && (c=getchar()) != EOF && c!= '\n'; ++i) {
+        line[i] = c;
     }
     if (c == '\n'){
-        s[i] = c;
+        line[i] = c;
         ++i;
     }
-    s[i] = '\0';
+    line[i] = '\0';
     return i;
 }
 
 /* copy: copy 'from' into 'to'; assume to is big enough */
-void copy(char to[], char from[])
+void copy(void)
 {
     int i;
+    extern char line[], longest[];
 
     i = 0;
-    while ((to[i] = from[i]) != '\0')
+    while ((longest[i] = line) != '\0')
         ++i;
 }
 
