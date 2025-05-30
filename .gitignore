@@ -3,3 +3,4 @@
 *.exe
 *.dSYM
  # Compiled executables
+.vscode/tasks.json
