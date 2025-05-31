@@ -4,7 +4,11 @@
 
 #define TABSTOP 8
 
+#define FOLDSTOP 20
+
 void copy(char to[], char from[]);
+
+void fold(char s[], int len);
 
 void enTab(char s[], int len);
 
@@ -17,7 +21,8 @@ int main()
     char verified[MAXLINE];
     int len = get_line(line, MAXLINE);
 
-    enTab(line, len);
+    fold(line, len);
+    
 }
 
 void copy(char to[], char from[])
@@ -27,6 +32,40 @@ void copy(char to[], char from[])
     i = 0;
     while ((to[i] = from[i]) != '\0')
         ++i;
+}
+
+void fold(char s[], int len) {
+    int counter = 0;
+    int last_blank = -1;
+    int start = 0;
+
+    for (int i = 0; i < len; ++i, ++counter) {
+        if (s[i] == ' ' || s[i] == '\t')
+            last_blank = i;
+
+        if (counter == FOLDSTOP) {
+            if (last_blank != -1) {
+                // Print up to last_blank
+                for (int j = start; j <= last_blank; ++j)
+                    putchar(s[j]);
+                putchar('\n');
+                i = last_blank; // restart after the blank
+                start = last_blank + 1;
+                counter = 0;
+                last_blank = -1;
+            } else {
+                // No blank found, break at FOLDSTOP
+                for (int j = start; j <= i; ++j)
+                    putchar(s[j]);
+                putchar('\n');
+                start = i + 1;
+                counter = 0;
+            }
+        }
+    }
+    // Print any remaining characters
+    for (int j = start; j < len; ++j)
+        putchar(s[j]);
 }
 
 void enTab(char s[], int len) {
