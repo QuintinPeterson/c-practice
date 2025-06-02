@@ -10,6 +10,8 @@ unsigned long int next = 1;
 
 void srand(unsigned int seed);
 
+void strcat(char s[], char t[]);
+
 int main()
 {
     
@@ -17,6 +19,19 @@ int main()
 
 
     return 0;
+}
+
+/* strcat: concatenate t to the end of a; s must ne nig enough */
+void strcat(char s[], char t[])
+{
+    int i;
+    int j;
+
+    i = j = 0;
+    while (s[i] != '\0') /* find end of s */
+        i++;
+    while ((s[i++] = t[j++]) != '\0') /* copy t */
+        ;
 }
 
 int atoi(char s[])
