@@ -38,17 +38,29 @@ void escape(char s[], char t[])
             case '\n':
                 t[j++] = '\\';
                 t[j++] = 'n';
-                nextIndexFull = 1;
                 break;
 
             case '\t':
                 t[j++] = '\\';
                 t[j++] = 't';
-                nextIndexFull = 1;
                 break;
+            case '\\':
+                if (s[i+1] == 'n') {
+                    t[j++] = '\n';
+                    i++;
+                }
+                else if (s[i+1] == 't') {
+                    t[j++] = '\t';
+                    i++;
+                }
+                else{
+                    t[j++] = s[i];
+                }
+                break; 
             default:
                 t[j++] = s[i];
                 break;
+            
             
         }
     }
