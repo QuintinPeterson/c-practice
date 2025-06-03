@@ -10,11 +10,19 @@ void copy(char to[], char from[]);
 
 int main()
 {
-    char line[MAXLINE];     /* current input line */
+    char all_input[MAXLINE];
     char verified[MAXLINE];
-    get_line(line, MAXLINE);
+    int len = 0, n;
 
-    escape(line, verified);
+    // Read all input into all_input
+    while ((n = get_line(all_input + len, MAXLINE - len)) > 0) {
+        len += n;
+    }
+
+    escape(all_input, verified);
+    printf("%s", verified);
+
+    
     
 
     return 0;
@@ -23,30 +31,28 @@ int main()
 void escape(char s[], char t[])
 {
     int i;
+    int j;
     int nextIndexFull = 0;
-    for (i = 0; s[i] != '\0'; i++) {
+    for (i = j = 0; s[i] != '\0'; i++) {
         switch(s[i]) {
             case '\n':
-                t[i++] = '\\';
-                t[i] = 'n';
+                t[j++] = '\\';
+                t[j++] = 'n';
                 nextIndexFull = 1;
+                break;
 
             case '\t':
-                t[i++] = '\\';
-                t[i] = 't';
+                t[j++] = '\\';
+                t[j++] = 't';
                 nextIndexFull = 1;
+                break;
             default:
-            if (nextIndexFull) {
-                t[++i] = s[i];
-                nextIndexFull = 0;
-            }
-            else {
-                t[i] = s[i];
-                nextIndexFull = 0;
-            }
+                t[j++] = s[i];
+                break;
+            
         }
     }
-    printf("%s", t);
+    t[j] = '\0';
 
 }
 
