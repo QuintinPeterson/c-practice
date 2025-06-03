@@ -12,6 +12,8 @@ void srand(unsigned int seed);
 
 void strcat(char s[], char t[]);
 
+unsigned getbits(unsigned x, int p, int n);
+
 int main()
 {
     
@@ -19,6 +21,12 @@ int main()
 
 
     return 0;
+}
+
+/* getbits: get n bits from position p */
+unsigned getbits(unsigned x, int p, int n)
+{
+    return (x >> (p+1-n)) & ~(~0 << n);
 }
 
 /* strcat: concatenate t to the end of a; s must ne nig enough */
