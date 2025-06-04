@@ -12,6 +12,8 @@ void reverse(char s[]);
 
 void itoa(int n, char s[]);
 
+int trim(char s[]);
+
 int main()
 {
     int c, i, nwhite, nother, ndigit[10];
@@ -41,6 +43,19 @@ int main()
         nwhite, nother);
 
     return 0;
+}
+
+/* trim: remove trailing blanks, tabs, newlines */
+int trim(char s[])
+{  
+    int n;
+
+    for (n = strlen(s)-1; n >= 0; n--)
+        if (s[n] != ' ' && s[n] != '\t' && s[n] != '\n')
+            break;
+    s[n+1] = '\0';
+    return n;
+
 }
 
 /* itoa: convert n to characters in s */
