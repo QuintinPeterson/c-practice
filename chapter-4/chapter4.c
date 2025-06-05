@@ -5,22 +5,41 @@
 int getline(char line[], int max);
 int strindex(char source[], char searchfor[]);
 double atof(char s[]);
+int atoi(char s[]);
 
 char pattern[] = "ould";    /* pattern to search for */
 
 /* find all lines matching pattern */
 int main()
 {
+    /* rudemrntary calc */
+    double sum, atof(char[]);
     char line[MAXLINE];
-    int found = 0;
+    int getline(char line[], int max);
 
+    sum = 0;
+    while (getline(line, MAXLINE) > 0)
+        printf("\t%g\n", sum += atof(line));
+    return 0;
+
+    int found = 0;
+    /*
     while (getline(line, MAXLINE) > 0)
         if (strindex(line, pattern) >= 0) {
             printf("%s", line);
             found++;
         }
     return found;
+    */
     
+}
+
+/* atoi: convert string s to integer using atof */
+int atoi(char s[])
+{
+    double atof(char s[]);
+
+    return (int) atof(s);
 }
 
 /* atof: convert string s to double */
