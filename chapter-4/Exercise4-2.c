@@ -12,14 +12,12 @@ int main()
 
     return 0;
 }
-/* */
 
 /* atof: convert string s to double */
 double atof(char s[])
 {
     double val, power;
     int i, sign;
-    int hello;
     
 
     for (i = 0; isspace(s[i]); i++) /* skips whitespace */
