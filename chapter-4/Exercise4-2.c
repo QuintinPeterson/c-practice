@@ -18,6 +18,7 @@ double atof(char s[])
 {
     double val, power;
     int i, sign;
+    /* 10 hour work day eeeeeeeeeeeeeee*/
     
 
     for (i = 0; isspace(s[i]); i++) /* skips whitespace */
