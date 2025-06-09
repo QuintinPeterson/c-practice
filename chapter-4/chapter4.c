@@ -1,54 +1,78 @@
 #include <stdio.h>
 #include <ctype.h>
+#include <stdlib.h> /* for atof() */
 #define MAXLINE 1000    /* maximum input line length */
+
+#define MAXOP 100   /* max size of operand or operator */
+#define NUMBER '0'  /* signal that a number was found */
+
+int getop(char []);
+void push(double);
+double pop(void);
 
 int getline(char line[], int max);
 int strindex(char source[], char searchfor[]);
-double atof(char s[]);
-int atoi(char s[]);
+// double atof(char s[]);
+// int atoi(char s[]);
 
 char pattern[] = "ould";    /* pattern to search for */
 
-/* find all lines matching pattern */
+/* reverse polish calculator */
 int main()
 {
-    /* rudemrntary calc */
-    double sum, atof(char[]);
-    char line[MAXLINE];
-    int getline(char line[], int max);
+    int type;
+    double op2;
+    char s[MAXOP];
 
-    sum = 0;
-    while (getline(line, MAXLINE) > 0)
-        printf("\t%g\n", sum += atof(line));
-    return 0;
-
-    int found = 0;
-    /*
-    while (getline(line, MAXLINE) > 0)
-        if (strindex(line, pattern) >= 0) {
-            printf("%s", line);
-            found++;
+    while((type = getop(s)) != EOF) {
+        switch (type) {
+            case NUMBER:
+                push(atof(s));
+                break;
+            case '+':
+                push(pop() + pop());
+                break;
+            case '*':
+                push(pop() * pop());
+                break;
+            case '-':
+                op2 = pop();
+                push(pop() - pop());
+                break;
+            case '/':
+                op2 = pop();
+                if (op2 != 0.0)
+                    push(pop() / op2);
+                else
+                    printf("error: zero divisor\n");
+                break;
+            case '\n':
+                printf("\t%.8g\n", pop());
+                break;
+            default:
+                printf("error: unknown commands%s\n", s);
+                break;
         }
-    return found;
-    */
+    }
+    return 0;
     
 }
 
-/* atoi: convert string s to integer using atof */
+/* atoi: convert string s to integer using atof 
 int atoi(char s[])
 {
     double atof(char s[]);
 
     return (int) atof(s);
-}
-
-/* atof: convert string s to double */
+} */
+/*
+ atof: convert string s to double 
 double atof(char s[])
 {
     double val, power;
     int i, sign;
 
-    for (i = 0; isspace(s[i]); i++) /* skips whitespace */
+    for (i = 0; isspace(s[i]); i++)  skips whitespace 
         ;
     sign = (s[i] == '-') ? -1 : 1;
     if (s[i] == '+' || s[i] == '-')
@@ -62,7 +86,7 @@ double atof(char s[])
         power *= 10.0;
     }
     return sign * val / power;
-}
+} */
 
 /* getline: get line into s, return length */
 int getline(char s[], int lim)
