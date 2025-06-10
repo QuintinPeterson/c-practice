@@ -5,6 +5,7 @@
 
 #define MAXOP 100   /* max size of operand or operator */
 #define NUMBER '0'  /* signal that a number was found */
+#define MAXVAL 100 /* maximum depth of val stack */
 
 int getop(char []);
 void push(double);
@@ -56,6 +57,29 @@ int main()
     }
     return 0;
     
+}
+
+int sp = 0; /* next free stack position */
+double val[MAXVAL]; /* value stack */
+
+/* push: push f onto value stack */
+void push(double f)
+{
+    if (sp < MAXVAL)
+        val[sp++] = f;
+    else
+        printf("error: stack full, can't push %g\n", f);
+}
+
+/* pop: pop and return top value from stack */
+double pop(void)
+{
+    if (sp > 0)
+        return val[--sp];
+    else {
+        printf("error: stack empty\n");
+        return 0.0;
+    }
 }
 
 /* atoi: convert string s to integer using atof 
