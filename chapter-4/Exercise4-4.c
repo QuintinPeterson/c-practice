@@ -11,7 +11,7 @@
 int getop(char []);
 void push(double);
 double pop(void);
-void printop(double *arr);
+double printop(double *arr);
 
 int sp = 0; /* next free stack position */
 double val[MAXVAL]; /* value stack */
@@ -21,6 +21,8 @@ void ungetch(int);
 
 char buf[BUFSIZE];  /* buffer for ungetch */
 int bufp = 0;   /* next free position in buf */
+
+
 
 int getline(char line[], int max);
 int strindex(char source[], char searchfor[]);
@@ -33,8 +35,11 @@ int main()
     int type;
     double op2;
     char s[MAXOP];
+    double f = 0;
+    double swap1 = 0;
+    double swap2 = 0;
 
-    printf("To see top of array type '?'.\n");
+    printf("To see top of array type '?'.\n To see duplicate the top type '@'.\n To swap the top two elements on the stack type '$'\n");
 
     while((type = getop(s)) != EOF) {
         switch (type) {
@@ -66,7 +71,24 @@ int main()
                     printf("error: zero mod\n");
                 break;
             case '?':
-                printop(val);
+                printf("Top of stack: %g\n", printop(val));
+                break;
+            case '@':
+                f = val[sp-1];
+                if (sp < MAXVAL)
+                    val[sp++] = f;
+                else
+                    printf("error: stack full, can't push %g\n", f);
+                break;
+            case '$':
+                swap1 = pop();
+                swap2 = pop();
+                push(swap1);
+                push(swap2);
+                break;
+            case '^':
+                for (int i = sp; i > 0; i--)
+                    pop();
                 break;
             case '\n':
                 if (sp > 0)
@@ -144,13 +166,16 @@ void ungetch(int c) /* push character back on input */
         buf[bufp++] = c;
 }
 
-void printop(double *arr)
+double printop(double *arr)
 {
     if (sp > 0)
-        printf("Top of stack: %g\n", val[sp-1]);
+        return val[sp-1];
     else
         printf("Stack is empty\n");
+        return 0;
 }
+
+
 
 /* getline: get line into s, return length */
 int getline(char s[], int lim)
